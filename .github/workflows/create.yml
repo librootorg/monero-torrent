@@ -1,0 +1,16 @@
+name: create torrent
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gpg transmission-cli transmission-daemon
+      - name: Build torrent
+        run: ./create_monero_torrent.sh
