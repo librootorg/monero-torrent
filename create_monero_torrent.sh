@@ -45,6 +45,10 @@ grep 'monero-' hashes.txt | sha256sum -c || {
 
 cd ../..
 
-transmission-create -s "$PIECE_SIZE" -o "$TORRENT_DIR/$torrent.torrent" --anonymize "$OUTPUT_DIR/$torrent"
+#transmission-create -s "$PIECE_SIZE" -o "$TORRENT_DIR/$torrent.torrent" --anonymize "$OUTPUT_DIR/$torrent"
 # prints the magnet link
-transmission-show -m "$TORRENT_DIR/$torrent.torrent"
+#transmission-show -m "$TORRENT_DIR/$torrent.torrent"
+
+#transmission-show "$TORRENT_DIR/$torrent.torrent"
+
+py3createtorrent -p 512 -o watch/ -c "Multi file torrent for the Monero project" -v $OUTPUT_DIR/$torrent
