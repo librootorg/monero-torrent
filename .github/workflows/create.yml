@@ -2,10 +2,13 @@ name: create torrent
 
 on:
   workflow_dispatch:
+  push:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
@@ -14,5 +17,21 @@ jobs:
           pip3 install py3createtorrent bencodepy
       - name: download files and create torrent
         run: ./create_monero_torrent.sh
-      - name: show-magnet link
-        run: transmission-show -m watch/*
+      - name: create release notes
+        run: |
+          {
+            echo "### 🧲 Link"
+            echo '```'
+            transmission-show -m watch/*
+            echo '```'
+            echo "### Torrent info"
+            echo '```'
+            transmission-show watch/*
+            echo '```'
+          } >> release-notes.md
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          body_path: release-notes.md
+          files: watch/*
