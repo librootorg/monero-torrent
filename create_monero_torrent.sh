@@ -62,4 +62,4 @@ cd ../..
 
 #transmission-show "$TORRENT_DIR/$torrent.torrent"
 
-py3createtorrent -p 512 -o watch/ -c "$torrent_comment" --webseed https://dlsrc.getmonero.org/ -v $OUTPUT_DIR/$torrent
+py3createtorrent -p 512 -o watch/ -c "$torrent_comment" --webseed "https://dlsrc.getmonero.org/" --webseed "http://node.monerodevs.org/" -v $OUTPUT_DIR/$torrent
