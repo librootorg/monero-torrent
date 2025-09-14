@@ -25,23 +25,33 @@ mv "$OUTPUT_DIR/hashes.txt" "$OUTPUT_DIR/$torrent/"
 mv "$OUTPUT_DIR/binaryfate.asc" "$OUTPUT_DIR/$torrent/"
 
 for file in $(awk '/monero-/ {print $2}' "$OUTPUT_DIR/$torrent/hashes.txt"); do
-  # dont re-download if exists
-  [ -f "$OUTPUT_DIR/$torrent/$file" ] && continue
-  echo "Downloading $file..."
   dir=cli
   if [[ $file =~ gui ]]; then
       dir=gui
   fi
+  # dont re-download if exists
+  [ -f "$OUTPUT_DIR/$torrent/$dir/$file" ] && continue
+  echo "Downloading $file..."
   url=https://dlsrc.getmonero.org/${dir}/${file}
-  curl -sLO --output-dir "$OUTPUT_DIR/$torrent" "$url"
+  # make sure subdir exists
+  mkdir -p "$OUTPUT_DIR/$torrent/$dir"
+  # webseed compatible https://www.bittorrent.org/beps/bep_0019.html
+  curl -sLO --output-dir "$OUTPUT_DIR/$torrent/$dir" "$url"
 done
 
 cd "$OUTPUT_DIR/$torrent"
 
-grep 'monero-' hashes.txt | sha256sum -c || {
-  echo "One or more hashes failed"
-  exit 1
-}
+grep 'monero-' hashes.txt | while read -r hash file; do
+  path="cli/$file"
+  if [[ $file =~ gui ]]; then
+    path="gui/$file"
+  fi
+
+  echo "$hash  $path" | sha256sum -c - || {
+    echo "Hash check failed for $path"
+    exit 1
+  }
+done
 
 cd ../..
 
@@ -51,4 +61,4 @@ cd ../..
 
 #transmission-show "$TORRENT_DIR/$torrent.torrent"
 
-py3createtorrent -p 512 -o watch/ -c "Multi file torrent for the Monero project" -v $OUTPUT_DIR/$torrent
+py3createtorrent -p 512 -o watch/ -c "Multi file torrent for the Monero project" --webseed https://dlsrc.getmonero.org/ -v $OUTPUT_DIR/$torrent
