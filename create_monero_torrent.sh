@@ -17,7 +17,8 @@ gpg --import "$OUTPUT_DIR/binaryfate.asc"
 gpg --verify "$OUTPUT_DIR/hashes.txt"
 
 version=$(awk '/monero-source-v/ {print $2}' "$OUTPUT_DIR/hashes.txt" | awk -F".tar.bz2" '{print $1}' | awk -F"-" '{print $3}')
-torrent="Monero-project-torrent-$version"
+torrent="monero-project-torrent"
+torrent_comment="Multi file torrent for the Monero project $version"
 
 mkdir -p "$OUTPUT_DIR/$torrent"
 
@@ -61,4 +62,4 @@ cd ../..
 
 #transmission-show "$TORRENT_DIR/$torrent.torrent"
 
-py3createtorrent -p 512 -o watch/ -c "Multi file torrent for the Monero project" --webseed https://dlsrc.getmonero.org/ -v $OUTPUT_DIR/$torrent
+py3createtorrent -p 512 -o watch/ -c "$torrent_comment" --webseed https://dlsrc.getmonero.org/ -v $OUTPUT_DIR/$torrent
