@@ -8,33 +8,32 @@ create a torrent of all monero release binaries with a deterministic file info h
 
 the shell script outputs this:
 ```
-
+├── create_moenro_torrent.sh
 ├── downloads
 │   └── monero-project-torrent
 │       ├── binaryfate.asc
-│       ├── hashes.txt
-│       ├── monero-android-armv7-v0.18.4.2.tar.bz2
-│       ├── monero-android-armv8-v0.18.4.2.tar.bz2
-│       ├── monero-freebsd-x64-v0.18.4.2.tar.bz2
-│       ├── monero-gui-install-win-x64-v0.18.4.2.exe
-│       ├── monero-gui-linux-x64-v0.18.4.2.tar.bz2
-│       ├── monero-gui-mac-armv8-v0.18.4.2.dmg
-│       ├── monero-gui-mac-x64-v0.18.4.2.dmg
-│       ├── monero-gui-source-v0.18.4.2.tar.bz2
-│       ├── monero-gui-win-x64-v0.18.4.2.zip
-│       ├── monero-linux-armv7-v0.18.4.2.tar.bz2
-│       ├── monero-linux-armv8-v0.18.4.2.tar.bz2
-│       ├── monero-linux-riscv64-v0.18.4.2.tar.bz2
-│       ├── monero-linux-x64-v0.18.4.2.tar.bz2
-│       ├── monero-linux-x86-v0.18.4.2.tar.bz2
-│       ├── monero-mac-armv8-v0.18.4.2.tar.bz2
-│       ├── monero-mac-x64-v0.18.4.2.tar.bz2
-│       ├── monero-source-v0.18.4.2.tar.bz2
-│       ├── monero-win-x64-v0.18.4.2.zip
-│       └── monero-win-x86-v0.18.4.2.zip
-├── create-monero-torrent.sh
-└── watch
-    └── monero-project-torrent.torrent
+│       ├── cli
+│       │   ├── monero-android-armv7-v0.18.4.2.tar.bz2
+│       │   ├── monero-android-armv8-v0.18.4.2.tar.bz2
+│       │   ├── monero-freebsd-x64-v0.18.4.2.tar.bz2
+│       │   ├── monero-linux-armv7-v0.18.4.2.tar.bz2
+│       │   ├── monero-linux-armv8-v0.18.4.2.tar.bz2
+│       │   ├── monero-linux-riscv64-v0.18.4.2.tar.bz2
+│       │   ├── monero-linux-x64-v0.18.4.2.tar.bz2
+│       │   ├── monero-linux-x86-v0.18.4.2.tar.bz2
+│       │   ├── monero-mac-armv8-v0.18.4.2.tar.bz2
+│       │   ├── monero-mac-x64-v0.18.4.2.tar.bz2
+│       │   ├── monero-source-v0.18.4.2.tar.bz2
+│       │   ├── monero-win-x64-v0.18.4.2.zip
+│       │   └── monero-win-x86-v0.18.4.2.zip
+│       ├── gui
+│       │   ├── monero-gui-install-win-x64-v0.18.4.2.exe
+│       │   ├── monero-gui-linux-x64-v0.18.4.2.tar.bz2
+│       │   ├── monero-gui-mac-armv8-v0.18.4.2.dmg
+│       │   ├── monero-gui-mac-x64-v0.18.4.2.dmg
+│       │   ├── monero-gui-source-v0.18.4.2.tar.bz2
+│       │   └── monero-gui-win-x64-v0.18.4.2.zip
+│       └── hashes.txt
 ```
 
 
