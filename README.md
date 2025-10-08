@@ -8,9 +8,9 @@ create a torrent of all monero release binaries with a deterministic file info h
 
 the shell script outputs this:
 ```
-├── create_moenro_torrent.sh
+├── create_torrent.sh
 ├── downloads
-│   └── monero-project-torrent
+│   └── monero-v0.18.4.2
 │       ├── binaryfate.asc
 │       ├── cli
 │       │   ├── monero-android-armv7-v0.18.4.2.tar.bz2
@@ -34,6 +34,8 @@ the shell script outputs this:
 │       │   ├── monero-gui-source-v0.18.4.2.tar.bz2
 │       │   └── monero-gui-win-x64-v0.18.4.2.zip
 │       └── hashes.txt
+└── watch
+    └── monero-v0.18.4.2.torrent
 ```
 
 
