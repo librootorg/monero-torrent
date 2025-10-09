@@ -8,7 +8,7 @@ create a torrent of all monero release binaries with a deterministic file info h
 
 the shell script outputs this:
 ```
-├── create_torrent.sh
+├── create_monero_torrent.sh
 ├── downloads
 │   └── monero-v0.18.4.2
 │       ├── binaryfate.asc
