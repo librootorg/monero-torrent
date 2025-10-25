@@ -33,7 +33,7 @@ the shell script outputs this:
 │       │   ├── monero-gui-mac-x64-v0.18.4.2.dmg
 │       │   ├── monero-gui-source-v0.18.4.2.tar.bz2
 │       │   └── monero-gui-win-x64-v0.18.4.2.zip
-│       └── hashes.txt
+│       └── hashes-v0.18.4.2.txt
 └── watch
     └── monero-v0.18.4.2.torrent
 ```
