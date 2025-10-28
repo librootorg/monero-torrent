@@ -2,13 +2,12 @@
 set -e
 set -o pipefail
 
-#remote url or local full path
-#remote_cdn_url
+#CDN_URL remote must have this structure:
 #├── cli
 #    ├── monero_cli_files
 #└── gui
 #    ├── monero-gui-files
-#local cdn path can have binaries nested in folders OR in the same folder as this serches recursively
+#CDN_URL local no nesting required, just place all files in the folder.
 CDN_URL="${CDN_URL:-https://dlsrc.getmonero.org}"
 OUTPUT_DIR="${OUTPUT_DIR:-downloads}"
 TORRENT_DIR="${TORRENT_DIR:-watch}"
