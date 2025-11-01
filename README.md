@@ -105,4 +105,4 @@ apt install inotify-tools
 
 running `./inotify.sh` in a screen session will delete old torrent files when a new Monero torrent is placed in the `./watch` folder.
 
-if your client supports adding an RSS feed, one is provided in the rss folder. todo: confirm working
+if your client supports adding an RSS feed, one is provided in the rss folder.
