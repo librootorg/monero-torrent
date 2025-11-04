@@ -30,24 +30,33 @@ jobs:
               - 'submodules/mktorrent/**'
               - 'create_monero_torrent.sh'
 
-      - name: Install transmission-cli
+      - name: transmission-show (pull or build)
         run: |
-          sudo apt-get install -y transmission-cli
+          tag_name="ghcr.io/plowsof/monero-torrent-show:latest"
+          if ! docker pull $tag_name; then
+            echo "DEBUG: not found, building"
+            docker build -f ./.github/docker/Dockerfile.transmission -t $tag_name .
+            docker push -a ghcr.io/plowsof/monero-torrent-show
+          else
+            echo "DEBUG: PULLED"
+          fi
 
       - name: get version from hashes.txt
         id: hashes_version
         run: |
           HASHES_URL="https://www.getmonero.org/downloads/hashes.txt"
           curl -sL $HASHES_URL -o hashes.txt
-          version=$(awk '/monero-source-v/ {print $2}' "hashes.txt" | awk -F".tar.bz2" '{print $1}' | awk -F"-" '{print $3}') 
-          echo "VERSION=$version" >> $GITHUB_ENV
+          VERSION=$(awk '/monero-source-v/ {print $2}' "hashes.txt" | awk -F".tar.bz2" '{print $1}' | awk -F"-" '{print $3}')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+        env:
+          VERSION: $VERSION
 
       - uses: actions/cache@v4
         id: binaries_cache
         if: github.ref_type == 'tag'
         with:
           path: ./downloads
-          key: monero-binaries-$VERSION
+          key: monero-binaries-${{ env.VERSION }}
 
       - name: ghcr login
         uses: docker/login-action@v3
@@ -65,7 +74,7 @@ jobs:
           else
             docker compose --profile remote up
           fi
-          MAGNET_LINK=$(transmission-show -m ./watch/*)
+          MAGNET_LINK=$(docker run --rm -v "./watch:/watch" ghcr.io/plowsof/monero-torrent-show:latest -m /watch/monero-$VERSION.torrent)
           echo "MAGNET_LINK_REMOTE=$MAGNET_LINK" >> $GITHUB_ENV
           INFOHASH="${MAGNET_LINK#*btih:}"
           INFOHASH="${INFOHASH%%&*}"
@@ -84,7 +93,7 @@ jobs:
       - name: Run local profile
         run: |
           docker compose --profile local up
-          MAGNET_LINK=$(transmission-show -m ./watch/*)
+          MAGNET_LINK=$(docker run --rm -v "./watch:/watch" ghcr.io/plowsof/monero-torrent-show:latest -m /watch/monero-$VERSION.torrent)
           echo "MAGNET_LINK_LOCAL=$MAGNET_LINK" >> $GITHUB_ENV
 
 
@@ -105,11 +114,11 @@ jobs:
           {
             echo "### Torrent info"
             echo '```'
-            transmission-show watch/*
+            docker run --rm -v "./watch:/watch" ghcr.io/plowsof/monero-torrent-show:latest /watch/monero-$VERSION.torrent
             echo '```'
             echo "### 🧲 Link"
             echo '```'
-            transmission-show -m watch/*
+            docker run --rm -v "./watch:/watch" ghcr.io/plowsof/monero-torrent-show:latest -m /watch/monero-$VERSION.torrent
             echo '```'
           } >> release-notes.md
 
