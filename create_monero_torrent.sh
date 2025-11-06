@@ -62,8 +62,8 @@ cli_version=$(awk '/monero-source-v/ {print $2}' "$OUTPUT_DIR/hashes.txt" | awk 
 gui_version=$(awk '/monero-gui-source-v/ {print $2}' "$OUTPUT_DIR/hashes.txt" | awk -F".tar.bz2" '{print $1}' | awk -F"-" '{print $4}')
 cli_torrent="monero-$cli_version"
 gui_torrent="monero-gui-$gui_version"
-gui_torrent_comment="Multi file torrent for the Monero project GUI $gui_version"
-cli_torrent_comment="Multi file torrent for the Monero project $version"
+gui_torrent_comment="Monero GUI $gui_version"
+cli_torrent_comment="Monero CLI $cli_version"
 
 mkdir -p "$OUTPUT_DIR/$cli_torrent"
 mkdir -p "$OUTPUT_DIR/$gui_torrent"
