@@ -30,7 +30,7 @@ is_url() {
 
 # reinvent the wheel and download/verify binaries
 if is_url "$HASHES_URL"; then
-  curl -sL $HASHES_URL -o "$OUTPUT_DIR/hashes.txt"
+  curl -sSfL $HASHES_URL -o "$OUTPUT_DIR/hashes.txt"
 else
   # recursively find a file https://stackoverflow.com/a/656744
   src_file=$(find "$CDN_URL" -type f -name "$HASHES_URL" -print -quit)
@@ -43,7 +43,7 @@ else
 fi
 
 if is_url "$BF_KEY_URL"; then
-  curl -sL $BF_KEY_URL -o "$OUTPUT_DIR/binaryfate.asc"
+  curl -sSfL $BF_KEY_URL -o "$OUTPUT_DIR/binaryfate.asc"
 else
   # recursively find a file https://stackoverflow.com/a/656744
   src_file=$(find "$CDN_URL" -type f -name "$BF_KEY_URL" -print -quit)
@@ -81,7 +81,7 @@ for x in cli gui; do
 
     if is_url "$CDN_URL"; then
         url="$CDN_URL/$hash_file"
-        curl -sL "$url" -o "$dest"
+        curl -sSfL "$url" -o "$dest"
     else
         # requires versioned hashes file in CDN path. 2 if gui/cli are on different versions
         src_file=$(find "$CDN_URL" -type f -name "$hash_file" -print -quit)
@@ -110,7 +110,7 @@ for file in $(awk '/monero-/ {print $2}' "$OUTPUT_DIR/hashes.txt"); do
   # webseed compatible https://www.bittorrent.org/beps/bep_0019.html
   if is_url "$CDN_URL"; then
     echo $url
-    curl -sLO --output-dir "$OUTPUT_DIR/$torrent/$dir" "$url"
+    curl -sSfLO --output-dir "$OUTPUT_DIR/$torrent/$dir" "$url"
   else
     # recursively find a file https://stackoverflow.com/a/656744
     src_file=$(find "$CDN_URL" -type f -name "$file" -print -quit)
