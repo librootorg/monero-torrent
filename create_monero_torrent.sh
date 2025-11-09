@@ -140,4 +140,4 @@ done
 cd ../
 
 ./mktorrent -l $PIECE_SIZE -o "$TORRENT_DIR/$cli_torrent.torrent" -n $cli_torrent -c "$cli_torrent_comment" -w "$DEFAULT_CDN_URL" -v $OUTPUT_DIR/$cli_torrent
-./mktorrent -l $PIECE_SIZE -o "$TORRENT_DIR/$gui_torrent.torrent" -n $torrent -c "$gui_torrent_comment" -w "$DEFAULT_CDN_URL" -v $OUTPUT_DIR/$gui_torrent
+./mktorrent -l $PIECE_SIZE -o "$TORRENT_DIR/$gui_torrent.torrent" -n $gui_torrent -c "$gui_torrent_comment" -w "$DEFAULT_CDN_URL" -v $OUTPUT_DIR/$gui_torrent
