@@ -66,6 +66,12 @@ HASHES_URL="hashes.txt" \
 ./create_monero_torrent.sh
 ```
 
+You can also pass a custom hashes URL, providing the files within are on the `CDN_URL` (_Note: a local hashes file requires a local folder for `CDN_URL`_):
+
+```
+HASHES_URL="https://raw.githubusercontent.com/binaryFate/monero-site/refs/heads/release-CLIandGUI-v0.18.4.4/downloads/hashes.txt" ./create_monero_torrent.sh
+```
+
 # docker
 
 if you see `ContainerConfig` error you need to upgrade docker-compose. In debian:
