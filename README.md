@@ -83,13 +83,19 @@ sudo apt-get install docker-compose-plugin
 
 env variables are defined in docker-compose.yml
 
+after cloning:
+
+```
+git clone --recurse-submodules https://github.com/plowsof/monero-torrent && cd monero-torrent
+```
+
 Default where files are downloaded:
 
 ```
 docker compose --profile remote up --build
 ```
 
-see usage above and docker-compose.yml to use local files:
+see usage above and docker-compose.yml to use local files: _(all files inside `cdn/`)_
 
 ```
 docker compose --profile local up --build
